@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Portfolio</title>
+    <!-- Google Fonts & FontAwesome untuk Icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- CDN untuk Smooth Scroll Engine -->
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+</head>
+<body>
+<!-- Indikator Progress Scroll -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- INTRO SPLASH SCREEN ALA NETFLIX -->
+<div class="intro-overlay" id="introOverlay">
+    <canvas id="netflixCanvas"></canvas>
+</div>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">Dev<span>Port.</span></a>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+  <section id="hero" class="hero-section">
+    <!-- Konten Teks Kiri -->
+    <div class="hero-content">
+        <h3>Halo Semua, Saya</h3>
+        
+        <!-- CANVAS KHUSUS UNTUK PARTICLE TYPOGRAPHY NAMA KAMU -->
+        <div class="canvas-container">
+            <canvas id="particleCanvas"></canvas>
+        </div>
+        
+        <p>Saya seorang <span class="typing-text"></span></p>
+        <a href="#projects" class="btn">Lihat Karya Saya</a>
+    </div>
+
+    <div class="hero-image-container">
+        <div class="lanyard-hanger"></div>
+        
+        <svg class="lanyard-svg">
+            <path id="lanyardPath" d="M 150 10 L 150 150" stroke="#0ea5e9" stroke-width="5" fill="none" />
+        </svg>
+        
+        <div class="id-card" id="idCard">
+            <div class="card-header">
+                <div class="card-holder"></div>
+                <div class="badge-logo">DEV</div>
+            </div>
+            <div class="card-body">
+                <img src="ishaq.jpg" alt="Foto Maulana" class="profile-img">
+                <h2>Maulana Ishaq</h2>
+                <p class="role">Web Developer</p>
+            </div>
+            <div class="card-footer">
+                <div class="barcode"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about-section reveal">
+        <h2 class="section-title">Tentang Saya</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <p>Saya adalah seorang web designer dan programmer yang fokus menciptakan pengalaman digital yang indah, fungsional, dan interaktif. Berorientasi pada detail dan selalu haus akan teknologi baru.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills" class="skills-section reveal">
+        <h2 class="section-title">Keahlian</h2>
+        <div class="skills-container">
+            <div class="skill-card"><i class="fab fa-html5"></i> <h3>HTML5</h3></div>
+            <div class="skill-card"><i class="fab fa-css3-alt"></i> <h3>CSS3</h3></div>
+            <div class="skill-card"><i class="fab fa-js"></i> <h3>JavaScript</h3></div>
+            <div class="skill-card"><i class="fas fa-paint-brush"></i> <h3>UI/UX Design</h3></div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+   <section id="projects" class="projects-section reveal">
+        <h2 class="section-title">Project Terbaru</h2>
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <!-- PROYEK UTAMA: Toko Buah Online Probolinggo -->
+<div class="project-card">
+    <div class="project-img">
+        <!-- Panggil file gambar screenshot kamu -->
+        <img src="jualan.png" alt="Toko Buah Online Probolinggo">
+    </div>
+    <div class="project-info">
+        <h3>Toko Buah Online Probolinggo</h3>
+        <p>Platform e-commerce lokal yang dirancang untuk memasarkan buah segar langsung dari petani terbaik di Kota Mangga secara online dan interaktif.</p>
+        <div class="project-buttons">
+            <a href="https://ishaqmaulana010-cloud.github.io/buahprobolinggo/" target="_blank" class="project-link">
+                Live Demo <i class="fas fa-external-link-alt"></i>
+            </a>
+        </div>
+    </div>
+</div>
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-img">
+                    <img src="https://via.placeholder.com/400x250" alt="Project 2">
+                </div>
+                <div class="project-info">
+                    <h3>Creative Agency</h3>
+                    <p>Website portofolio untuk agensi kreatif.</p>
+                    <a href="#" class="project-link">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="contact-section reveal">
+        <h2 class="section-title">Hubungi Saya</h2>
+        <div class="contact-container">
+            <form class="contact-form">
+                <input type="text" placeholder="Nama Anda" required>
+                <input type="email" placeholder="Email Anda" required>
+                <textarea placeholder="Pesan Anda" rows="5" required></textarea>
+                <button type="submit" class="btn">Kirim Pesan</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Maulana Ishaq. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
