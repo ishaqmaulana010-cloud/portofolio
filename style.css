@@ -499,3 +499,41 @@ html.lenis {
 .lenis.lenis-scrolling iframe {
     pointer-events: none;
 }
+/* ==========================================
+   PERBAIKAN RESPONSIVITAS MOBILE (HP)
+   ========================================== */
+@media (max-width: 768px) {
+    /* 1. Atur tinggi section utama agar tidak terlalu memotong teks */
+    .hero-section {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 80px 20px 40px 20px; /* Beri ruang dari navbar atas */
+        box-sizing: border-box;
+    }
+
+    /* 2. Sempurnakan kontainer pembungkus lanyard id card */
+    .hero-image-container {
+        width: 100%;
+        max-width: 280px; /* Membatasi lebar maksimal di HP agar tidak terlalu gemuk */
+        margin: 0 auto 20px auto; /* Memberikan jarak bawah sebelum teks masuk */
+        transform: scale(0.9); /* Mengecilkan sedikit seluruh komponen lanyard secara proporsional */
+    }
+
+    /* 3. Atur tali gantung lanyard agar tidak terlalu panjang menjuntai ke atas */
+    .hero-image-container::before, /* Jika kamu pakai pseudo-element untuk tali */
+    .lanyard-line { 
+        height: 60px !important; /* Memotong tinggi tali biru di atas ID Card */
+    }
+
+    /* 4. Sesuaikan ukuran font teks perkenalan di bawah lanyard agar ramah di mata */
+    .hero-section h1, 
+    .hero-section .typing-text {
+        font-size: 24px !important; /* Ukuran teks ideal untuk layar HP */
+        text-align: center;
+        margin-top: 10px;
+        line-height: 1.3;
+    }
+}
