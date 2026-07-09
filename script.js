@@ -490,17 +490,84 @@ function handleReveal() {
 
 // Jalankan deteksi reveal setiap kali user melakukan scrolling
 window.addEventListener('scroll', handleReveal);
+// ==========================================
+// LOGIKA ANIMASI MATA INTERAKTIF (RESPONSIVE + PUPIL SCALE)
+// ==========================================
+const irises = document.querySelectorAll('.cyber-iris');
+const pupils = document.querySelectorAll('.cyber-pupil');
+const eyes = document.querySelectorAll('.cyber-eye');
 
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
 
-// Tambahan Logika: Integrasikan ke transisi akhir Splash Screen Netflix kamu yang kemarin
-// Cari baris kode akhir animasi Netflix kamu, pastikan fungsi handleReveal() dipanggil tepat saat intro selesai
-// Contoh penempatannya di dalam setTimeout() akhir intro Netflix kemarin:
-/*
-setTimeout(() => {
-    introOverlay.classList.add('intro-fade-out');
-    document.body.style.overflow = 'auto'; 
+// Menangkap kursor mouse
+window.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+// Menangkap sentuhan HP
+window.addEventListener('touchmove', (e) => {
+    if (e.touches[0]) {
+        mouseX = e.touches[0].clientX;
+        mouseY = e.touches[0].clientY;
+    }
+}, { passive: true });
+
+const irisData = Array.from(irises).map(() => ({ currentX: 0, currentY: 0 }));
+
+function animateEyes() {
+    irises.forEach((iris, index) => {
+        const eye = eyes[index];
+        const pupil = pupils[index];
+        const rect = eye.getBoundingClientRect();
+        
+        const eyeCenterX = rect.left + rect.width / 2;
+        const eyeCenterY = rect.top + rect.height / 2;
+        
+        const dx = mouseX - eyeCenterX;
+        const dy = mouseY - eyeCenterY;
+        const angle = Math.atan2(dy, dx);
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Batasi pergerakan bola mata
+        const maxOffset = 16; 
+        const clampedDistance = Math.min(distance, 180);
+        const targetX = Math.cos(angle) * (clampedDistance / 180 * maxOffset);
+        const targetY = Math.sin(angle) * (clampedDistance / 180 * maxOffset);
+        
+        // --- FIX GERAKAN LAMBAT: Naikkan nilai dari 0.1 ke 0.25 biar responsif gila! ---
+        irisData[index].currentX += (targetX - irisData[index].currentX) * 0.25;
+        irisData[index].currentY += (targetY - irisData[index].currentY) * 0.25;
+        
+        // Aplikasikan pergerakan mata
+        iris.style.transform = `translate(${irisData[index].currentX}px, ${irisData[index].currentY}px)`;
+        
+        // --- EFEK TAKJUB (PUPIL MEMBESAR) ---
+        // Jika kursor mendekati area mata (jarak kurang dari 250px), pupil membesar up to 1.5x
+        if (distance < 250) {
+            // Semakin dekat kursor, semakin besar pupil hitamnya
+            const scaleFactor = 1 + ((250 - distance) / 250) * 0.5; 
+            pupil.style.transform = `scale(${scaleFactor})`;
+        } else {
+            pupil.style.transform = `scale(1)`; // Ukuran normal jika kursor jauh
+        }
+    });
     
-    // Picu animasi halaman pertama langsung jalan setelah intro kelar
-    handleReveal(); 
-}, 2200);
-*/
+    requestAnimationFrame(animateEyes);
+}
+animateEyes();
+
+// --- LOGIKA BERKEDIP ACAK ---
+function triggerRandomBlink() {
+    eyes.forEach(eye => {
+        if (Math.random() > 0.25) {
+            eye.classList.add('blink');
+            setTimeout(() => {
+                eye.classList.remove('blink');
+            }, 120); 
+        }
+    });
+    setTimeout(triggerRandomBlink, 2500 + Math.random() * 3500);
+}
+setTimeout(triggerRandomBlink, 2000);

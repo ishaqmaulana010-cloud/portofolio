@@ -504,6 +504,11 @@ html.lenis {
    ========================================== */
 @media (max-width: 768px) {
     /* 1. Atur tinggi section utama agar tidak terlalu memotong teks */
+    #hero, .hero-section {
+    background: transparent !important;
+    position: relative;
+    z-index: 2; /* Angka 2 memastikan teks nama dan lanyard tetap berada di depan mata */
+}
     .hero-section {
         min-height: 100vh;
         display: flex;
@@ -536,4 +541,91 @@ html.lenis {
         margin-top: 10px;
         line-height: 1.3;
     }
+}
+/* ==========================================
+   CYBER EYE TRACKING BACKGROUND SYSTEM (UPDATED)
+   ========================================== */
+
+.cyber-bg-eyes-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0; 
+    pointer-events: none; 
+    width: auto;
+    height: auto;
+    opacity: 0.55; /* TERANG: Di-naikkan dari 0.35 biar lebih jelas dan menyala, bre */
+}
+
+.cyber-eye-container.center-eyes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.cyber-eye-container.center-eyes .cyber-eye {
+    width: 140px; 
+    height: 115px;
+    background: radial-gradient(circle at 50% 50%, #0a0a1a 0%, #111128 100%);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    /* Glow luar dan dalam dibuat lebih terang siber neon */
+    border: 2px solid rgba(0, 212, 255, 0.4);
+    box-shadow: inset 0 0 35px rgba(0, 200, 255, 0.3), 0 0 30px rgba(0, 200, 255, 0.25);
+    transition: transform 0.1s ease-in-out;
+    transform-origin: center;
+    will-change: transform;
+}
+
+.cyber-eye-container.center-eyes .cyber-eye.blink {
+    transform: scaleY(0.01);
+}
+
+.cyber-iris {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #00d4ff, #0088ff, #00d4ff);
+    position: absolute;
+    top: calc(50% - 28px);
+    left: calc(50% - 28px);
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.7), inset 0 0 10px rgba(0, 0, 0, 0.5);
+    will-change: transform;
+}
+
+/* Pupil hitam tengah yang bisa membesar otomatis */
+.cyber-pupil {
+    width: 26px;
+    height: 26px;
+    background-color: #001122;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 13px);
+    left: calc(50% - 13px);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+    /* Animasi transisi scale saat membesar biar smooth */
+    transition: transform 0.15s ease-out; 
+    will-change: transform;
+}
+
+.cyber-reflection {
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* Biar background section tetap transparan & teks aman di depan */
+#hero, .hero-section, main {
+    background: transparent !important;
+}
+#hero, .hero-section {
+    position: relative;
+    z-index: 2;
 }
