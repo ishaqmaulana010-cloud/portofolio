@@ -1,4 +1,6 @@
-/* RESET & BASE STYLES */
+/* ==========================================
+   RESET & BASE STYLES
+   ========================================== */
 * {
     margin: 0;
     padding: 0;
@@ -7,10 +9,11 @@
 }
 
 body {
-    background-color: #0f172a; /* Warna dark mode keren */
+    background-color: #0f172a; 
     color: #e2e8f0;
     overflow-x: hidden;
 }
+
 /* ==========================================
    NETFLIX STYLE INTRO OVERLAY
    ========================================== */
@@ -20,7 +23,7 @@ body {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #000000; /* Hitam pekat khas bioskop/Netflix */
+    background-color: #000000; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +44,10 @@ body {
     opacity: 0;
     pointer-events: none;
 }
-/* NAVBAR */
+
+/* ==========================================
+   NAVBAR
+   ========================================== */
 .navbar {
     position: fixed;
     top: 0;
@@ -75,7 +81,7 @@ body {
 }
 
 .logo span {
-    color: #0ea5e9; /* Warna aksen biru neon */
+    color: #0ea5e9; 
 }
 
 .nav-links {
@@ -95,15 +101,44 @@ body {
     color: #0ea5e9;
 }
 
-/* HERO SECTION */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: #fff;
+}
+
+/* ==========================================
+   HERO SECTION (DESKTOP BASE)
+   ========================================== */
+#hero, .hero-section {
+    background: transparent !important;
+    position: relative;
+    z-index: 2;
+}
+
 .hero-section {
-    height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: radial-gradient(circle, rgba(30,41,59,1) 0%, rgba(15,23,42,1) 100%);
+    justify-content: space-between;
+    gap: 50px;
+    height: 100vh;
     padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-content {
+    flex: 1;
+    text-align: left;
+    z-index: 3;
 }
 
 .hero-content h3 {
@@ -121,6 +156,22 @@ body {
 .hero-content p {
     font-size: 24px;
     margin-bottom: 30px;
+}
+
+.canvas-container {
+    width: 100%;
+    height: 120px; 
+    margin-bottom: 10px;
+    position: relative;
+}
+
+#particleCanvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: all; 
 }
 
 .btn {
@@ -141,11 +192,165 @@ body {
     transform: translateY(-3px);
 }
 
-/* SECTION UTAMA */
+/* ==========================================
+   LANYARD & ID CARD SYSTEM
+   ========================================== */
+.hero-image-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 550px;
+    width: 100%;
+    user-select: none;
+    z-index: 3;
+}
+
+.lanyard-hanger {
+    width: 18px;
+    height: 18px;
+    background: #475569;
+    border-radius: 50%;
+    border: 3px solid #0ea5e9;
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
+}
+
+.lanyard-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; 
+    z-index: 4;
+}
+
+.id-card {
+    width: 250px;
+    height: 370px;
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    border: 2px solid #334155;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    cursor: grab;
+    position: absolute;
+    left: 50%;
+    top: 140px; 
+    z-index: 5;
+    transform-origin: top center;
+    will-change: transform, top, left;
+}
+
+.id-card:active {
+    cursor: grabbing;
+}
+
+.card-header { width: 100%; display: flex; justify-content: space-between; margin-bottom: 15px; }
+.card-holder { width: 40px; height: 8px; background: #475569; border-radius: 4px; margin: 0 auto; }
+.badge-logo { font-size: 11px; font-weight: bold; color: #0ea5e9; border: 1px solid #0ea5e9; padding: 2px 6px; border-radius: 4px; }
+.profile-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid #0ea5e9; object-fit: cover; margin-bottom: 15px; pointer-events: none; }
+.id-card h2 { font-size: 18px; color: #fff; margin-bottom: 5px; }
+.id-card .role { font-size: 13px; color: #94a3b8; font-weight: 600; }
+.card-footer { margin-top: auto; width: 100%; }
+.barcode { width: 100%; height: 25px; background: repeating-linear-gradient(90deg, #cbd5e1, #cbd5e1 2px, transparent 2px, transparent 6px); opacity: 0.6; }
+
+/* ==========================================
+   CYBER EYE TRACKING BACKGROUND
+   ========================================== */
+.cyber-bg-eyes-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0; 
+    pointer-events: none; 
+    width: auto;
+    height: auto;
+    opacity: 0.55; 
+}
+
+.cyber-eye-container.center-eyes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.cyber-eye-container.center-eyes .cyber-eye {
+    width: 140px; 
+    height: 115px;
+    background: radial-gradient(circle at 50% 50%, #0a0a1a 0%, #111128 100%);
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(0, 212, 255, 0.4);
+    box-shadow: inset 0 0 35px rgba(0, 200, 255, 0.3), 0 0 30px rgba(0, 200, 255, 0.25);
+    transition: transform 0.1s ease-in-out;
+    transform-origin: center;
+    will-change: transform;
+}
+
+.cyber-eye-container.center-eyes .cyber-eye.blink {
+    transform: scaleY(0.01);
+}
+
+.cyber-iris {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, #00d4ff, #0088ff, #00d4ff);
+    position: absolute;
+    top: calc(50% - 28px);
+    left: calc(50% - 28px);
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.7), inset 0 0 10px rgba(0, 0, 0, 0.5);
+    will-change: transform;
+}
+
+.cyber-pupil {
+    width: 26px;
+    height: 26px;
+    background-color: #001122;
+    border-radius: 50%;
+    position: absolute;
+    top: calc(50% - 13px);
+    left: calc(50% - 13px);
+    box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
+    transition: transform 0.15s ease-out; 
+    will-change: transform;
+}
+
+.cyber-reflection {
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
+    border-radius: 50%;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+/* ==========================================
+   GENERAL SECTIONS (ABOUT, SKILLS, PROJECTS)
+   ========================================== */
+section, main {
+    background: transparent !important;
+}
+
 section {
     padding: 100px 20px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
 .section-title {
@@ -165,7 +370,6 @@ section {
     border-radius: 2px;
 }
 
-/* ABOUT */
 .about-text {
     text-align: center;
     max-width: 800px;
@@ -175,7 +379,6 @@ section {
     color: #94a3b8;
 }
 
-/* SKILLS */
 .skills-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -201,7 +404,6 @@ section {
     box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);
 }
 
-/* PROJECTS */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -215,9 +417,23 @@ section {
     transition: transform 0.3s;
 }
 
+.project-img {
+    width: 100%;
+    height: 220px; 
+    overflow: hidden;
+    background-color: #0f172a;
+}
+
 .project-img img {
     width: 100%;
-    display: block;
+    height: 100%;
+    object-fit: cover; 
+    object-position: top center; 
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img img {
+    transform: scale(1.08);
 }
 
 .project-info {
@@ -233,219 +449,6 @@ section {
     margin-bottom: 20px;
 }
 
-.project-link {
-    color: #0ea5e9;
-    text-decoration: none;
-    font-weight: 600;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-}
-
-/* CONTACT FORM */
-.contact-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.contact-form input, .contact-form textarea {
-    width: 100%;
-    padding: 15px;
-    background-color: #1e293b;
-    border: 1px solid #334155;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    outline: none;
-}
-
-.contact-form input:focus, .contact-form textarea:focus {
-    border-color: #0ea5e9;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 30px;
-    background-color: #0f172a;
-    border-top: 1px solid #1e293b;
-    color: #64748b;
-}
-
-/* MOBILE RESPONSIVE TOGGLE */
-.menu-toggle {
-    display: none;
-    cursor: pointer;
-}
-
-.bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    transition: all 0.3s ease-in-out;
-    background-color: #fff;
-}
-
-@media (max-width: 768px) {
-    .nav-links {
-        position: absolute;
-        top: -1000px;
-        flex-direction: column;
-        background-color: #1e293b;
-        width: 100%;
-        text-align: center;
-        transition: 0.5s;
-        left: 0;
-    }
-    .nav-links.active {
-        top: 70px;
-    }
-    .nav-links li {
-        margin: 20px 0;
-    }
-    .nav-links li a {
-        margin-left: 0;
-    }
-    .menu-toggle {
-        display: block;
-    }
-}/* CONTAINER HERO */
-.hero-section {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 50px;
-    height: 100vh;
-}
-
-.hero-content {
-    flex: 1;
-    text-align: left;
-}
-
-/* CONTAINER AREA CARD */
-.hero-image-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    height: 550px;
-    width: 100%;
-    user-select: none;
-}
-
-.lanyard-hanger {
-    width: 18px;
-    height: 18px;
-    background: #475569;
-    border-radius: 50%;
-    border: 3px solid #0ea5e9;
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
-    box-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
-}
-
-/* SVG UNTUK TALI DIBUAT FULL CONTAINER */
-.lanyard-svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none; /* Biar tidak mengganggu klik pada kartu */
-    z-index: 4;
-}
-
-/* ID CARD UTAMA */
-.id-card {
-    width: 250px;
-    height: 370px;
-    background: linear-gradient(145deg, #1e293b, #0f172a);
-    border: 2px solid #334155;
-    border-radius: 16px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-    cursor: grab;
-    position: absolute;
-    /* Posisi awal kartu diatur oleh JavaScript physics */
-    left: 50%;
-    top: 140px; 
-    z-index: 5;
-    transform-origin: top center;
-    will-change: transform, top, left;
-}
-
-.id-card:active {
-    cursor: grabbing;
-}
-
-/* DETAIL INTERIOR KARTU */
-.card-header { width: 100%; display: flex; justify-content: space-between; margin-bottom: 15px; }
-.card-holder { width: 40px; height: 8px; background: #475569; border-radius: 4px; margin: 0 auto; }
-.badge-logo { font-size: 11px; font-weight: bold; color: #0ea5e9; border: 1px solid #0ea5e9; padding: 2px 6px; border-radius: 4px; }
-.profile-img { width: 110px; height: 110px; border-radius: 50%; border: 3px solid #0ea5e9; object-fit: cover; margin-bottom: 15px; pointer-events: none; }
-.id-card h2 { font-size: 18px; color: #fff; margin-bottom: 5px; }
-.id-card .role { font-size: 13px; color: #94a3b8; font-weight: 600; }
-.card-footer { margin-top: auto; width: 100%; }
-.barcode { width: 100%; height: 25px; background: repeating-linear-gradient(90deg, #cbd5e1, #cbd5e1 2px, transparent 2px, transparent 6px); opacity: 0.6; }
-
-@media (max-width: 768px) {
-    .hero-section { flex-direction: column-reverse; text-align: center; padding-top: 100px; }
-    .hero-content { text-align: center; }
-}
-/* PARTICLE CANVAS STYLING */
-.canvas-container {
-    width: 100%;
-    height: 120px; /* Area khusus buat animasi nama */
-    margin-bottom: 10px;
-    position: relative;
-}
-
-#particleCanvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: all; /* Memastikan mouse bisa dideteksi oleh canvas */
-}
-/* PENGATURAN RASIO GAMBAR PROYEK */
-.project-img {
-    width: 100%;
-    height: 220px; /* Ukuran tinggi ideal yang direkomendasikan */
-    overflow: hidden;
-    background-color: #0f172a;
-}
-
-.project-img img {
-    width: 100%;
-    height: 100%;
-    /* Magic property: Memotong gambar secara proporsional layaknya background-size: cover */
-    object-fit: cover; 
-    object-position: top center; /* Fokus memotong area atas agar nama web kamu tetap kelihatan jelas */
-    transition: transform 0.5s ease;
-}
-
-/* Efek Zoom Halus saat Card di-hover */
-.project-card:hover .project-img img {
-    transform: scale(1.08);
-}
-
-/* Tambahan styling untuk tombol tautan */
 .project-buttons {
     margin-top: 15px;
 }
@@ -465,172 +468,9 @@ footer {
     background-color: #0ea5e9;
     color: #fff;
 }
+
 /* ==========================================
-   SMOOTH REVEAL ANIMATION (SCROLL EFFECT)
-   ========================================== */
-
-/* Kondisi awal sebelum section terlihat (tersembunyi di bawah) */
-.reveal {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
-    will-change: transform, opacity;
-}
-
-/* Kondisi setelah section tersentuh scroll (muncul halus) */
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Mengoptimalkan scrolling pada HTML agar engine Lenis berjalan maksimal */
-html.lenis {
-    height: auto;
-}
-
-.lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-    overflow: clip;
-}
-
-.lenis.lenis-scrolling iframe {
-    pointer-events: none;
-}
-/* ==========================================
-   PERBAIKAN RESPONSIVITAS MOBILE (HP)
-   ========================================== */
-@media (max-width: 768px) {
-    /* 1. Atur tinggi section utama agar tidak terlalu memotong teks */
-    #hero, .hero-section {
-    background: transparent !important;
-    position: relative;
-    z-index: 2; /* Angka 2 memastikan teks nama dan lanyard tetap berada di depan mata */
-}
-    .hero-section {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 80px 20px 40px 20px; /* Beri ruang dari navbar atas */
-        box-sizing: border-box;
-    }
-
-    /* 2. Sempurnakan kontainer pembungkus lanyard id card */
-    .hero-image-container {
-        width: 100%;
-        max-width: 280px; /* Membatasi lebar maksimal di HP agar tidak terlalu gemuk */
-        margin: 0 auto 20px auto; /* Memberikan jarak bawah sebelum teks masuk */
-        transform: scale(0.9); /* Mengecilkan sedikit seluruh komponen lanyard secara proporsional */
-    }
-
-    /* 3. Atur tali gantung lanyard agar tidak terlalu panjang menjuntai ke atas */
-    .hero-image-container::before, /* Jika kamu pakai pseudo-element untuk tali */
-    .lanyard-line { 
-        height: 60px !important; /* Memotong tinggi tali biru di atas ID Card */
-    }
-
-    /* 4. Sesuaikan ukuran font teks perkenalan di bawah lanyard agar ramah di mata */
-    .hero-section h1, 
-    .hero-section .typing-text {
-        font-size: 24px !important; /* Ukuran teks ideal untuk layar HP */
-        text-align: center;
-        margin-top: 10px;
-        line-height: 1.3;
-    }
-}
-/* ==========================================
-   CYBER EYE TRACKING BACKGROUND SYSTEM (UPDATED)
-   ========================================== */
-
-.cyber-bg-eyes-wrapper {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 0; 
-    pointer-events: none; 
-    width: auto;
-    height: auto;
-    opacity: 0.55; /* TERANG: Di-naikkan dari 0.35 biar lebih jelas dan menyala, bre */
-}
-
-.cyber-eye-container.center-eyes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-}
-
-.cyber-eye-container.center-eyes .cyber-eye {
-    width: 140px; 
-    height: 115px;
-    background: radial-gradient(circle at 50% 50%, #0a0a1a 0%, #111128 100%);
-    border-radius: 50%;
-    position: relative;
-    overflow: hidden;
-    /* Glow luar dan dalam dibuat lebih terang siber neon */
-    border: 2px solid rgba(0, 212, 255, 0.4);
-    box-shadow: inset 0 0 35px rgba(0, 200, 255, 0.3), 0 0 30px rgba(0, 200, 255, 0.25);
-    transition: transform 0.1s ease-in-out;
-    transform-origin: center;
-    will-change: transform;
-}
-
-.cyber-eye-container.center-eyes .cyber-eye.blink {
-    transform: scaleY(0.01);
-}
-
-.cyber-iris {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: conic-gradient(from 0deg, #00d4ff, #0088ff, #00d4ff);
-    position: absolute;
-    top: calc(50% - 28px);
-    left: calc(50% - 28px);
-    box-shadow: 0 0 25px rgba(0, 212, 255, 0.7), inset 0 0 10px rgba(0, 0, 0, 0.5);
-    will-change: transform;
-}
-
-/* Pupil hitam tengah yang bisa membesar otomatis */
-.cyber-pupil {
-    width: 26px;
-    height: 26px;
-    background-color: #001122;
-    border-radius: 50%;
-    position: absolute;
-    top: calc(50% - 13px);
-    left: calc(50% - 13px);
-    box-shadow: 0 0 12px rgba(0, 212, 255, 0.6);
-    /* Animasi transisi scale saat membesar biar smooth */
-    transition: transform 0.15s ease-out; 
-    will-change: transform;
-}
-
-.cyber-reflection {
-    width: 10px;
-    height: 10px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
-    border-radius: 50%;
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
-/* Biar background section tetap transparan & teks aman di depan */
-#hero, .hero-section, main {
-    background: transparent !important;
-}
-#hero, .hero-section {
-    position: relative;
-    z-index: 2;
-}
-/* ==========================================
-   TESTIMONIALS SECTION STYLE
+   TESTIMONIALS SECTION
    ========================================== */
 .testimonials-section {
     padding: 80px 0;
@@ -647,7 +487,6 @@ html.lenis {
     padding: 0 20px;
 }
 
-/* Desain Kartu Pesan yang Enak Dilihat */
 .testimonial-card {
     background: rgba(17, 17, 40, 0.6);
     border: 1px solid rgba(0, 212, 255, 0.15);
@@ -702,44 +541,131 @@ html.lenis {
     color: rgba(0, 212, 255, 0.6);
     grid-column: 1 / -1;
 }
+
 /* ==========================================
-   PERBAIKAN RESPONSIVE HP (VERSI FINAL KETAT)
+   CONTACT FORM & FOOTER
    ========================================== */
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+}
+
+.contact-form input:focus, .contact-form textarea:focus {
+    border-color: #0ea5e9;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background-color: #0f172a;
+    border-top: 1px solid #1e293b;
+    color: #64748b;
+}
+
 /* ==========================================
-   PERBAIKAN RESPONSIVE HP (VERSI FINAL JAMINAN)
+   SMOOTH REVEAL ANIMATION (SCROLL EFFECT)
    ========================================== */
-@media screen and (max-width: 768px) {
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform, opacity;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+html.lenis { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overflow: clip; }
+.lenis.lenis-scrolling iframe { pointer-events: none; }
+
+
+/* ==========================================
+   SISTEM RESPONSIVE MOBILE (SATU UNTUK SEMUA)
+   ========================================== */
+@media (max-width: 768px) {
+    /* Navbar HP */
+    .nav-links {
+        position: absolute;
+        top: -1000px;
+        flex-direction: column;
+        background-color: #1e293b;
+        width: 100%;
+        text-align: center;
+        transition: 0.5s;
+        left: 0;
+    }
+    .nav-links.active {
+        top: 70px;
+        padding-bottom: 20px;
+    }
+    .nav-links li {
+        margin: 20px 0;
+    }
+    .nav-links li a {
+        margin-left: 0;
+    }
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Penataan Ulang Hero Layout agar tidak bertabrakan */
+    .hero-section {
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        min-height: 100vh;
+        padding: 120px 20px 60px 20px; /* Jarak aman atas-bawah */
+    }
+
+    /* Mengatur Teks Nama Tanpa Paksaan/Lag */
+    .hero-content {
+        text-align: center;
+        width: 100%;
+    }
+    .hero-content h1, .glitch {
+        font-size: clamp(1.8rem, 8vw, 2.5rem); /* Ukuran fleksibel otomatis */
+        line-height: 1.3;
+        white-space: normal; /* Biarkan alami, ini yang menghilangkan lag render! */
+        word-break: keep-all;
+    }
     
-    /* 1. PAKSA TEKS NAMA PAS DI SATU BARIS TANPA LAG */
-    .hero-content h1, 
-    .glitch { 
-        font-size: 1.5rem !important; /* Ukuran diperkecil super kecil agar pas di satu baris */
-        white-space: nowrap !important; /* Jaga agar tetap satu baris biar efek glitch gak rusak */
-        overflow: visible !important;
-        line-height: 1.2 !important;
+    .canvas-container {
+        height: 80px; /* Kecilkan area partikel sedikit di HP */
     }
 
-    /* 2. TARGET LANGSUNG KE CONTAINER LANYARD UNTUK JAGA JARAK */
-    .hero-image-container { 
-        position: relative !important;
-        display: flex !important;
-        justify-content: center !important;
-        margin-top: 50px !important; /* Jarak atas disesuaikan */
-        margin-bottom: 150px !important; /* Jarak dorong bawah super jauh agar gak nimpa teks 'Tentang Saya' */
+    /* Penataan Ulang Pembungkus Lanyard (Kunci Anti-Tumpang Tindih) */
+    .hero-image-container {
+        width: 100%;
+        height: 480px; /* Diberi tinggi mutlak agar tidak tembus ke section bawah */
+        margin-top: 30px;
+        margin-bottom: 30px; /* Spacer aman dari teks About */
+        transform: scale(0.85); /* Kartu dikecilkan sedikit di HP */
+        transform-origin: top center;
     }
 
-    /* Targetkan card-nya langsung agar ukurannya pas di HP */
-    .id-card,
-    #lanyard-card,
-    #lanyard-container > canvas {
-        transform: scale(0.8) !important; /* Kartu lanyard dikecilin 20% agar pas */
-    }
-
-    /* 3. PASTIKAN SECTION-NYA GAK PUNYA TINGGI TERKUNCI */
-    .hero-section, 
-    #hero {
-        height: auto !important;
-        min-height: 100vh !important;
-        padding-bottom: 120px !important;
+    /* Mata Siber sedikit digeser di HP agar seimbang */
+    .cyber-bg-eyes-wrapper {
+        top: 40%;
     }
 }
