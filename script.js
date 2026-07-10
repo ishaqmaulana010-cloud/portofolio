@@ -571,3 +571,94 @@ function triggerRandomBlink() {
     setTimeout(triggerRandomBlink, 2500 + Math.random() * 3500);
 }
 setTimeout(triggerRandomBlink, 2000);
+// ==========================================
+// INTEGRASI DATABASE SUPABASE (KIRIM & PAJANG PESAN)
+
+// ==========================================
+// KUNCI DATABASE SUPABASE KAMU (UPDATED)
+// ==========================================
+const SUPABASE_URL = 'https://vybtvktcyqyjrhnkwlj.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_0bneid89jGgwpIupg2eLmw_VSHilDvhq'; 
+
+// PERBAIKAN: Tambahkan kata 'supabase.' di awal createClient agar tidak error koneksi
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// 1. FUNGSI MENGAMBIL PESAN YANG SUDAH DI-APPROVE UNTUK DIPAJANG
+async function muatTestimoni() {
+    const grid = document.getElementById('testimonialsGrid');
+    
+    // Ambil data yang kolom 'tampilkan' bernilai true
+    const { data, error } = await supabase
+        .from('pesan_pengunjung')
+        .select('nama, pesan')
+        .eq('tampilkan', true);
+
+    if (error) {
+        grid.innerHTML = '<div class="loading-text">Gagal memuat pesan.</div>';
+        return;
+    }
+
+    if (data.length === 0) {
+        grid.innerHTML = '<div class="loading-text">Belum ada pesan terpajang. Berikan komentar pertamamu di bawah!</div>';
+        return;
+    }
+
+    grid.innerHTML = ''; // Kosongkan text loading
+    
+    // Render data ke bentuk kartu HTML
+    data.forEach(item => {
+        const inisial = item.nama.charAt(0);
+        const cardHtml = `
+            <div class="testimonial-card">
+                <p class="testimonial-quote">"${item.pesan}"</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">${inisial}</div>
+                    <div class="author-info">
+                        <h4>${item.nama}</h4>
+                    </div>
+                </div>
+            </div>
+        `;
+        grid.insertAdjacentHTML('beforeend', cardHtml);
+    });
+}
+
+// 2. FUNGSI MENGIRIM PESAN DARI FORM HUBUNGI SAYA
+const formKontak = document.querySelector('.contact-section form') || document.querySelector('form');
+
+if (formKontak) {
+    formKontak.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Ambil elemen input (sesuaikan name/class-nya dengan html kamu bre)
+        const namaInput = formKontak.querySelector('input[type="text"]') || formKontak.querySelector('[name="nama"]');
+        const emailInput = formKontak.querySelector('input[type="email"]') || formKontak.querySelector('[name="email"]');
+        const pesanInput = formKontak.querySelector('textarea');
+        const tombolKirim = formKontak.querySelector('button');
+
+        const dataPesan = {
+            nama: namaInput.value,
+            email: emailInput.value,
+            pesan: pesanInput.value
+        };
+
+        tombolKirim.innerText = 'Mengirim...';
+        tombolKirim.disabled = true;
+
+        // Insert data ke tabel Supabase
+        const { error } = await supabase.from('pesan_pengunjung').insert([dataPesan]);
+
+        if (error) {
+            alert('Waduh eror bre, silakan coba lagi!');
+            tombolKirim.innerText = 'Kirim Pesan';
+            tombolKirim.disabled = false;
+        } else {
+            alert('Pesan berhasil terkirim, bre! Makasih ya. Pesanmu akan disaring dulu sebelum dipajang.');
+            formKontak.reset();
+            tombolKirim.innerText = 'Kirim Pesan';
+            tombolKirim.disabled = false;
+        }
+    });
+}
+
+// Jalankan fungsi muat data saat website pertama kali dibuka
+document.addEventListener('DOMContentLoaded', muatTestimoni);

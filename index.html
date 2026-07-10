@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ishaq Portfolio</title>
-    <!-- Google Fonts & FontAwesome untuk Icon -->
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
-    <!-- CDN untuk Smooth Scroll Engine -->
-     <!-- Menggunakan emoji huruf M keren berlatar biru sebagai logo tab tanpa download apa pun -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Ⓜ️</text></svg>">
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+<!-- CDN untuk Smooth Scroll Engine -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.36/dist/lenis.min.js"></script>
+    
+    <!-- PERBAIKAN: Gunakan library Supabase CDN versi spesifik yang paling stabil -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.43.4/dist/umd/supabase.js"></script>
 </head>
+
 <body>
-    <body>
+    
     <div class="cyber-bg-eyes-wrapper">
         <div class="cyber-eye-container center-eyes">
             <div class="cyber-eye">
@@ -154,6 +157,16 @@
     </section>
 
     <!-- CONTACT SECTION -->
+     <section id="testimonials" class="testimonials-section">
+    <div class="container">
+        <h2 class="section-title">Apa Kata Mereka</h2>
+        <div class="title-line"></div>
+        
+        <div class="testimonials-grid" id="testimonialsGrid">
+            <div class="loading-text">Memuat pesan...</div>
+        </div>
+    </div>
+    </section>
     <section id="contact" class="contact-section reveal">
         <h2 class="section-title">Hubungi Saya</h2>
         <div class="contact-container">
