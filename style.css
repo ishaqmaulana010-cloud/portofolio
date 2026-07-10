@@ -702,3 +702,36 @@ html.lenis {
     color: rgba(0, 212, 255, 0.6);
     grid-column: 1 / -1;
 }
+/* ==========================================
+   PERBAIKAN RESPONSIVE HP (VERSI FINAL KETAT)
+   ========================================== */
+@media screen and (max-width: 768px) {
+    
+    /* 1. PAKSA TEKS NAMA BIAR BISA TURUN KE BAWAH / MENGECIL */
+    .hero-content h1, 
+    .glitch { 
+        font-size: 1.8rem !important; /* Ukuran diperkecil lagi */
+        white-space: normal !important; /* Ini kunci biar teksnya gak memanjang lurus terus */
+        word-break: break-word !important;
+        line-height: 1.2 !important;
+    }
+
+    /* 2. TARGET LANGSUNG KE PEMBUNGKUS LANYARD (Sesuai Inspect Element kamu) */
+    .hero-image-container { 
+        position: relative !important;
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 40px !important;
+        margin-bottom: 120px !important; /* Jarak dorong bawah super jauh biar gak nimpa teks */
+        transform: scale(0.85) !important; /* Lanyard dikecilin 15% biar pas di layar HP */
+    }
+
+    /* 3. BEBASKAN TINGGI SECTION AGAR KONTEN BISA MELAR KE BAWAH */
+    .hero-section, 
+    #hero {
+        height: auto !important;
+        min-height: 100vh !important;
+        padding-bottom: 100px !important;
+        overflow: visible !important;
+    }
+}
