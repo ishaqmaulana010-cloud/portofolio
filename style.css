@@ -397,14 +397,107 @@ section {
     margin: 10px auto 0;
     border-radius: 2px;
 }
+/* ==========================================
+   EFEK KACA (GLASSMORPHISM) & 3D FLIP-FLOP ABOUT
+   ========================================== */
 
-.about-text {
-    text-align: center;
-    max-width: 800px;
+/* 1. Pengaturan Perspektif 3D Dunia Nyata */
+.flip-container {
+    perspective: 1000px; /* Memberi efek kedalaman ruang saat berputar */
+    max-width: 650px;
     margin: 0 auto;
-    font-size: 18px;
-    line-height: 1.8;
-    color: #94a3b8;
+    height: 320px; /* Mengunci tinggi kartu agar pas di desktop & HP */
+}
+
+/* 2. Kartu Utama yang Mengendalikan Putaran */
+.flip-card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Putaran elastis membal */
+    cursor: pointer;
+}
+
+/* Pemicu Rotasi Flip-Flop saat Kursor di Atasnya */
+.flip-container:hover .flip-card {
+    transform: rotateY(180deg);
+}
+
+/* 3. Aturan Bersama Sisi Depan dan Belakang */
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Menyembunyikan bagian belakang saat tidak diputar */
+    -webkit-backface-visibility: hidden;
+    border-radius: 24px;
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Sisi Belakang Dirotasi Duluan agar Sesuai Urutan */
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* 4. RACIKAN PRESET EFEK KACA TRANSPARAN (GLASSMORPHISM) */
+.glass-about {
+    background: rgba(30, 41, 59, 0.35); /* Transparan gelap */
+    backdrop-filter: blur(16px); /* Membiarkan elemen mata siber di belakangnya buram estetik */
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(14, 165, 233, 0.25); /* Garis border neon tipis */
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 
+                inset 0 0 15px rgba(14, 165, 233, 0.05);
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Reaksi efek kaca saat disentuh */
+.flip-container:hover .glass-about {
+    border-color: rgba(14, 165, 233, 0.5);
+    box-shadow: 0 25px 50px rgba(14, 165, 233, 0.15);
+}
+
+/* 5. Dekorasi Teks & Elemen Internal */
+.about-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px rgba(14, 165, 233, 0.5);
+}
+
+.about-icon-decor i {
+    font-size: 45px;
+    color: #0ea5e9;
+    animation: floatingIcon 3s ease-in-out infinite; /* Ikon astronot melayang halus */
+}
+
+.tap-hint {
+    font-size: 13px;
+    color: #64748b;
+    margin-top: 25px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.about-text-content {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #cbd5e1;
+    font-weight: 400;
+}
+
+/* Animasi Melayang untuk Ikon */
+@keyframes floatingIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 
 .skills-container {
@@ -432,34 +525,209 @@ section {
     box-shadow: 0 10px 20px rgba(14, 165, 233, 0.2);
 }
 
+/* ==========================================
+   3D GLASSMORPHISM PROJECTS SYSTEM (NEW)
+   ========================================== */
+
+/* Grid pembungkus kartu agar rapi sejajar */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
+/* Container Perspektif 3D */
+.project-parent {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+    perspective: 1000px; /* Kedalaman ruang 3D */
+}
+
+/* Kartu Utama */
 .project-card {
-    background-color: #1e293b;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: transform 0.3s;
+    padding-top: 60px;
+    position: relative;
+    border-radius: 20px;
+    border: 1px solid rgba(14, 165, 233, 0.2); /* Border neon siber tipis */
+    transform-style: preserve-3d;
+    
+    /* Background semi transparan gelap bertema siber */
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(30, 41, 59, 0.4) 100%);
+    background-size: 60px 60px;
+    
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 25px 40px -15px;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* Efek Ketika Kartu Di-Hover (Miring & Mengkilap) */
+.project-card:hover {
+    transform: rotate3d(0.5, 1, 0, 25deg); /* Efek miring 3D */
+    border-color: rgba(14, 165, 233, 0.5);
+    box-shadow: rgba(14, 165, 233, 0.15) 0px 30px 45px -10px;
+}
+
+/* RACIKAN EFEK KACA (GLASSMORPHISM) */
+.glass-project {
+    background: rgba(30, 41, 59, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Box Konten Di Dalam Kaca */
+.project-content-box {
+    border-radius: 0 0 20px 20px;
+    transition: all 0.5s ease-in-out;
+    padding: 20px 25px 30px 25px;
+    transform-style: preserve-3d;
+}
+
+/* Wrapper foto agar rapi dan tidak meluber keluar border kaca */
+.project-img-wrapper {
+    width: 100%;
+    height: 160px; /* Tinggi box foto pas di kartu */
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    
+    /* Efek Melayang 3D: Paling maju di depan teks */
+    transform-style: preserve-3d;
+    transform: translate3d(0px, 0px, 40px);
+    transition: all 0.5s ease-in-out;
+}
+
+/* Pengaturan Gambar di Dalam Wrapper */
 .project-img {
     width: 100%;
-    height: 220px; 
-    overflow: hidden;
-    background-color: #0f172a;
-}
-
-.project-img img {
-    width: 100%;
     height: 100%;
-    object-fit: cover; 
-    object-position: top center; 
-    transition: transform 0.5s ease;
+    object-fit: cover; /* Biar gambar proporsional, gak gepeng */
+    object-position: top center; /* Fokus ke bagian atas screenshot web */
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* Efek Interaksi Saat Kartu Di-Hover */
+.project-card:hover .project-img-wrapper {
+    transform: translate3d(0px, 0px, 55px); /* Foto makin melayang maju kedepan */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Gambar nge-zoom dikit pas di-hover biar estetik */
+.project-card:hover .project-img {
+    transform: scale(1.08);
+}
+
+/* Elemen Judul (Mendorong Keluar Efek 3D) */
+.project-content-box .project-card-title {
+    font-family: 'Orbitron', sans-serif;
+    display: inline-block;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0;
+    transition: all 0.5s ease-in-out;
+    transform: translate3d(0px, 0px, 50px); /* Teks melayang keluar */
+}
+
+.project-card:hover .project-card-title {
+    color: #0ea5e9;
+    text-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
+}
+
+/* Deskripsi Teks */
+.project-content-box .project-card-content {
+    margin-top: 15px;
+    font-size: 13px;
+    line-height: 1.6;
+    font-weight: 500;
+    color: #94a3b8;
+    transition: all 0.5s ease-in-out;
+    transform: translate3d(0px, 0px, 35px);
+}
+
+.project-card:hover .project-card-content {
+    color: #cbd5e1;
+}
+
+/* Tombol See More / Lihat Live */
+.project-see-more {
+    cursor: pointer;
+    margin-top: 1.5rem;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    padding: 0.6rem 1.2rem;
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+    transition: all 0.4s ease-in-out;
+    transform: translate3d(0px, 0px, 25px);
+}
+
+.project-see-more:hover {
+    transform: translate3d(0px, 0px, 55px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+}
+
+/* Box Indikator Tag Pojok Atas (Efek Kaca Melayang Paling Tinggi) */
+.project-tag-box {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    height: 55px;
+    width: 55px;
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: translate3d(0px, 0px, 70px); /* Efek melayang paling tinggi */
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 15px 15px -5px;
+    transition: all 0.5s ease-in-out;
+}
+
+.project-card:hover .project-tag-box {
+    border-color: rgba(14, 165, 233, 0.3);
+}
+
+.project-tag-box span {
+    display: block;
+    text-align: center;
+}
+
+.project-tag-box .tag-tech {
+    color: #0ea5e9;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.project-tag-box .tag-year {
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    margin-top: 2px;
+}
+
+/* RESPONSIVITAS HP */
+@media screen and (max-width: 600px) {
+    .project-card {
+        transform: none !important; 
+    }
+    .project-card:hover {
+        transform: translateY(-5px) !important; 
+    }
+}
 .project-card:hover .project-img img {
     transform: scale(1.08);
 }
@@ -573,6 +841,25 @@ section {
 /* ==========================================
    CONTACT FORM & FOOTER
    ========================================== */
+   /* ==========================================
+   PERBAIKAN FOOTER LOCK CENTER
+   ========================================== */
+footer {
+    width: 100%;
+    padding: 40px 20px;
+    background-color: #0f172a;
+    border-top: 1px solid #1e293b;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+    
+    /* System centering jaminan tengah */
+    display: block;
+    text-align: center;
+    clear: both; /* Mencegah efek elemen melayang (floating) dari atasnya */
+    position: relative;
+    z-index: 10;
+}
 /* ==========================================
    GLASSMORPHISM CONTACT & SOCIAL MEDIA SYSTEM
    ========================================== */
@@ -827,5 +1114,19 @@ html.lenis { height: auto; }
     /* Mata Siber sedikit digeser di HP agar seimbang */
     .cyber-bg-eyes-wrapper {
         top: 40%;
+    }
+}
+/* Responsivitas Kartu Tentang Saya di HP */
+@media screen and (max-width: 600px) {
+    .flip-container {
+        height: 380px; /* Lebih tinggi di HP agar teks biografi muat sempurna */
+        padding: 0 10px;
+    }
+    .about-text-content {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+    .about-title {
+        font-size: 24px;
     }
 }
