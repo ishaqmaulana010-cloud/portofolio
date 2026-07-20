@@ -194,7 +194,10 @@
   var SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*';
 
   function scrambleText(el, callback) {
-    var original = el.textContent;
+    if (!el.dataset.originalText) {
+      el.dataset.originalText = el.textContent;
+    }
+    var original = el.dataset.originalText;
     var length = original.length;
     var duration = 600 + length * 30; // adaptive duration
     var start = performance.now();
